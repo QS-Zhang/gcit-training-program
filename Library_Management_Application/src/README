@@ -1,0 +1,20 @@
+Author: Peng Zhang
+
+1. I fully implemented all methods that are required(100%)
+
+2. Librarian and Borrower works perfect(100%)
+
+3. Administrator: I have all methods implemented but I haven't added option 2-5 into the 
+Administrator Logic Flow.(Quite similar and simple). I added Option1(add/update/delete book) and
+ Option6( Override Due date)
+
+
+
+Overall I would say I did 95%.
+
+Issues:
+
+1. Once Deleting something, the index will be wrong in the sql when inserting a new element But I know how to fix it,
+just need some time.
+
+TO RUN THE APPLICATION JUST SIMPLY RUN MainApp.java
