@@ -17,7 +17,6 @@ public class LibraryBranchDAOTest {
 		branch.setBranchAddress("Some new branch address");
 		
 		
-		
 		try {
 			new LibraryBranchDAO().create(branch);
 		} catch (SQLException e) {
