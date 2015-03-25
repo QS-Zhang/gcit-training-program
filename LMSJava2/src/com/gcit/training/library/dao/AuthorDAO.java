@@ -1,7 +1,9 @@
 package com.gcit.training.library.dao;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.gcit.training.library.domain.Author;
 
@@ -24,5 +26,11 @@ public class AuthorDAO extends BaseDAO {
 	public void delete(Author author) throws SQLException {
 		save("delete from tbl_author where authorId = ?",
 				new Object[] { author.getAuthorId() });
+	}
+
+	@Override
+	public List<?> mapResult(ResultSet rs) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseDAO {
@@ -48,26 +47,24 @@ public abstract class BaseDAO {
 		}
 	}
 	
-	public List<Object> readAll(String query, Object[] vals) throws SQLException
-	{
-		List<Object> objects = new ArrayList<Object>();
-		
-		PreparedStatement stmt = conn.prepareStatement(query);
-		loopStatement(vals,stmt);
-		
-		ResultSet rs = stmt.executeQuery();
-		
-		int  loop = 0;
-		while(rs.next())
-		{
-			objects.get(loop++).getClass();
-		}
-		
-		
-		return objects;
-	}
+	public List<?> read(String query, Object[] vals) throws Exception {
+
+			PreparedStatement stmt = conn.prepareStatement(query);
+			int count = 1;
+			if(vals != null) {
+				for (Object obj : vals) {
+					stmt.setObject(count, obj);
+					count++;
+				}
+			}
+			ResultSet rs = stmt.executeQuery();
+			
+			return mapResult(rs);
+
+		} 
+
 	
-	
-	
+	public abstract List<?> mapResult(ResultSet rs) throws SQLException;
+
 
 }

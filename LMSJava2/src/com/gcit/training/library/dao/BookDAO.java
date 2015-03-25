@@ -1,18 +1,20 @@
 package com.gcit.training.library.dao;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.gcit.training.library.domain.Author;
 import com.gcit.training.library.domain.Book;
+import com.gcit.training.library.domain.Publisher;
 
 public class BookDAO extends BaseDAO {
 
 	public BookDAO(Connection connection) {
 		this.conn = connection;
-		
+
 	}
 
 	public void create(Book book) throws SQLException {
@@ -37,9 +39,9 @@ public class BookDAO extends BaseDAO {
 	}
 
 	public void update(Book book) throws SQLException {
-		
+
 		save("update tbl_book set title = ? where bookId = ?" , new Object[]{book.getTitle(), book.getBookId()});
-		
+
 		//Update Publisher
 		if(book.getPublisher() !=null)
 		{
@@ -49,16 +51,39 @@ public class BookDAO extends BaseDAO {
 
 	public void delete(Book book) throws SQLException {
 		//Cascade
-		
+
 		save("delete from tbl_book where bookId = ?", new Object[]{book.getBookId()});
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Book> getBook(Book book) throws Exception
+	{
+
+		List<?> bookList = read("select * from tbl_book where bookId = ?", new Object[]{book.getBookId()});
+		
+		return (List<Book>) bookList;
+		
+		
 		
 	}
-	
-	public List<Book> readAll(String query, Object[] vals) throws SQLException
-	{
-		
-		List<Book> bookList = new ArrayList<Book>();
-		
-		return bookList;
+
+	public List<?> mapResult(ResultSet rs) throws SQLException {
+		Book book = null;
+		List<Book> books = new ArrayList<Book>();
+
+		while (rs.next()) {
+			Publisher publisher = new Publisher();
+			publisher.setPublisherId(rs.getInt("pubId"));
+
+			book = new Book();
+			book.setPublisher(publisher);
+
+			book.setBookId(rs.getInt("bookId"));
+			book.setTitle(rs.getString("title"));
+			books.add(book);
+		}
+
+		return books;
 	}
 }
