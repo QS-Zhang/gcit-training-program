@@ -10,7 +10,7 @@ import com.gcit.training.library.domain.Author;
 import com.gcit.training.library.domain.Book;
 import com.gcit.training.library.domain.Publisher;
 
-public class BookDAO extends BaseDAO {
+public class BookDAO extends BaseDAO<Book> {
 
 	public BookDAO(Connection connection) {
 		this.conn = connection;
@@ -56,15 +56,11 @@ public class BookDAO extends BaseDAO {
 
 	}
 
-	@SuppressWarnings("unchecked")
+
 	public List<Book> getBook(Book book) throws Exception
 	{
-
-		List<?> bookList = read("select * from tbl_book where bookId = ?", new Object[]{book.getBookId()});
 		
-		return (List<Book>) bookList;
-		
-		
+		return (List<Book>) read("select * from tbl_book where bookId = ?", new Object[]{book.getBookId()});
 		
 	}
 

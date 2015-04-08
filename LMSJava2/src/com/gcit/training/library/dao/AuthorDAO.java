@@ -3,6 +3,7 @@ package com.gcit.training.library.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.gcit.training.library.domain.Author;
@@ -30,7 +31,7 @@ public class AuthorDAO extends BaseDAO {
 
 	@Override
 	public List<?> mapResult(ResultSet rs) throws SQLException {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 }

@@ -59,8 +59,10 @@ public class AuthorDAOTest {
 
 	@Test
 	public void testDelete() throws SQLException {
+		
 		Author author = new Author();
 		author.setAuthorId(1);
+		
 		try {
 			new AuthorDAO(conn).delete(author);
 			conn.commit();
